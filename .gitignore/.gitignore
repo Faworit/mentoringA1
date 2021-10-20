@@ -1,0 +1,30 @@
+.gradle
+/build/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+.shelf/
+
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+/out/
+
+### Local Environment ###
+src/main/resources/application-compose.yml
+src/main/resources/application-int-test.yml
