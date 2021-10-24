@@ -1,18 +1,13 @@
 package com.epam.ryabtsev;
 
-public class Consumer extends Thread{
+import java.util.concurrent.Callable;
+
+public class Consumer implements Callable<String> {
     QueueAction queueAction = new QueueAction();
 
-    public void run() {
-        for (int i = 1; i > 0; i++) {
-            try {
-                synchronized (QueueAction.class) {
-                    System.out.println("Message from queue: " + queueAction.readMessage());
-                }
-                Thread.sleep(4);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+    @Override
+    public String call() throws Exception {
+        Thread.sleep(4);
+        return queueAction.readMessage();
     }
 }

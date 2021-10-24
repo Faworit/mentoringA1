@@ -7,15 +7,15 @@ public class QueueAction {
     private static final int MAX_SIZE_QUEUE = 30;
     private static Queue<String> messages = new PriorityQueue<>();
 
-    public void addMessage(String message) throws InterruptedException {
+    synchronized public void addMessage(String message) throws InterruptedException {
         while (messages.size() == MAX_SIZE_QUEUE) {
             wait();
         }
         messages.add(message);
-        notify();
+        notifyAll();
     }
 
-    public String readMessage() throws InterruptedException {
+    synchronized public String readMessage() throws InterruptedException {
         String message;
         while (messages.size() == 0) {
             wait();

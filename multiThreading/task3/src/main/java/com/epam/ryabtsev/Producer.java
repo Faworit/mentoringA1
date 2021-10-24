@@ -16,9 +16,9 @@ public class Producer extends Thread{
                     .collect(Collectors.joining());
 
             try {
-                synchronized (QueueAction.class) {
+               /* synchronized (QueueAction.class) {*/
                     queueAction.addMessage(random);
-                }
+               // }
 
                 Thread.sleep(4);
             } catch (InterruptedException e) {
