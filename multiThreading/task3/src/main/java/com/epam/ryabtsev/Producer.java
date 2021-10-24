@@ -14,10 +14,12 @@ public class Producer extends Thread{
                     .mapToObj(symbols::charAt)
                     .map(Object::toString)
                     .collect(Collectors.joining());
-            synchronized (QueueAction.class) {
-                queueAction.addMessage(random);
-            }
+
             try {
+                synchronized (QueueAction.class) {
+                    queueAction.addMessage(random);
+                }
+
                 Thread.sleep(4);
             } catch (InterruptedException e) {
                 e.printStackTrace();

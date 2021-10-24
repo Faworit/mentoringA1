@@ -4,19 +4,25 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 
 public class QueueAction {
-    static Queue<String> messages = new PriorityQueue<>();
+    private static final int MAX_SIZE_QUEUE = 30;
+    private static Queue<String> messages = new PriorityQueue<>();
 
-    public void addMessage(String message) {
+    public void addMessage(String message) throws InterruptedException {
+        while (messages.size() == MAX_SIZE_QUEUE) {
+            wait();
+        }
         messages.add(message);
+        notify();
     }
 
-    public String readMessage() {
+    public String readMessage() throws InterruptedException {
         String message;
-        if (!messages.isEmpty()) {
-            message = messages.poll();
-        } else {
-            message = "No active messages in queue";
+        while (messages.size() == 0) {
+            wait();
         }
+        message = messages.poll();
+        notify();
+
         return message;
     }
 }

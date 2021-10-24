@@ -5,10 +5,10 @@ public class Consumer extends Thread{
 
     public void run() {
         for (int i = 1; i > 0; i++) {
-            synchronized (QueueAction.class) {
-                System.out.println("Message from queue: " + queueAction.readMessage());
-            }
             try {
+                synchronized (QueueAction.class) {
+                    System.out.println("Message from queue: " + queueAction.readMessage());
+                }
                 Thread.sleep(4);
             } catch (InterruptedException e) {
                 e.printStackTrace();
