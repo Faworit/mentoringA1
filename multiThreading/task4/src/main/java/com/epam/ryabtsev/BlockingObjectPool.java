@@ -7,11 +7,24 @@ import java.util.concurrent.ArrayBlockingQueue;
  */
 public class BlockingObjectPool {
     private static ArrayBlockingQueue<Object> pool;
+    private static BlockingObjectPool blockingObjectPool = null;
+
+    private BlockingObjectPool() {
+    }
+
+    public synchronized BlockingObjectPool getInstance() {
+        if (blockingObjectPool == null) {
+            blockingObjectPool = new BlockingObjectPool();
+        }
+
+        return blockingObjectPool;
+    }
+
     /**
      * Creates filled pool of passed size * * @param size of pool
      */
     public BlockingObjectPool(int size) {
-        this.pool = new ArrayBlockingQueue<>(10);
+        this.pool = new ArrayBlockingQueue<>(size);
     }
 
     /**
