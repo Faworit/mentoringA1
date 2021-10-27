@@ -8,11 +8,10 @@ public class Start {
 
     public static void main(String[] args) {
         Producer producer = new Producer();
-        Consumer consumer = new Consumer();
 
         producer.start();
 
-        for (int i = 1; i > 0; i++) {
+        while(true) {
             try {
                 ExecutorService ex = Executors.newCachedThreadPool();
                 Future<String> message = ex.submit(new Consumer());

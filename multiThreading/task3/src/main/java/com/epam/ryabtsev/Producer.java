@@ -4,11 +4,11 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 public class Producer extends Thread{
-    QueueAction queueAction = new QueueAction();
 
+    @Override
     public void run() {
         String symbols = "abcdefghijklmnopqrstuvwxyz";
-        for (int i = 1; i > 0; i++) {
+        while(true) {
             long size = new Random().nextInt(250);
             String random = new Random().ints(size, 0, symbols.length())
                     .mapToObj(symbols::charAt)
@@ -16,10 +16,7 @@ public class Producer extends Thread{
                     .collect(Collectors.joining());
 
             try {
-               /* synchronized (QueueAction.class) {*/
-                    queueAction.addMessage(random);
-               // }
-
+                QueueAction.getInstance().addMessage(random);
                 Thread.sleep(4);
             } catch (InterruptedException e) {
                 e.printStackTrace();
