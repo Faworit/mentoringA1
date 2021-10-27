@@ -3,12 +3,11 @@ package com.epam.ryabtsev.thread;
 import com.epam.ryabtsev.CollectionAction;
 
 public class CollectionFiller extends Thread {
-    CollectionAction collectionAction = new CollectionAction();
 
     public void run() {
-        for (int i = 1; i > 0; i++) {
+        while(true) {
             synchronized (CollectionAction.class) {
-                collectionAction.addNumber();
+                CollectionAction.getInstance().addNumber();
             }
             try {
                 Thread.sleep(4);

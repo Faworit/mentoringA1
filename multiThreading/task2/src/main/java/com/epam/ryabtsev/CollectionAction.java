@@ -5,8 +5,18 @@ import java.util.List;
 import java.util.Random;
 
 public class CollectionAction {
-    static List<Integer> nums = new ArrayList<>();;
-    private static boolean collectionExist = false;
+    private static CollectionAction collectionAction = null;
+    private static List<Integer> nums = new ArrayList<>();
+
+    private CollectionAction() {
+    }
+
+    public static synchronized CollectionAction getInstance() {
+        if (collectionAction == null) {
+            collectionAction = new CollectionAction();
+        }
+        return collectionAction;
+    }
 
     public void addNumber() {
         Random random = new Random();
