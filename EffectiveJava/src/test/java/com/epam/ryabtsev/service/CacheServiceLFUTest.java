@@ -6,15 +6,15 @@ import org.junit.jupiter.api.Test;
 
 class CacheServiceLFUTest {
 
-    CacheServiceLFU cacheServiceLFU = new CacheServiceLFU();
-
     @Test
     void getValue() {
         //given
         Object object = null;
+        CacheObject cacheObject = new CacheObject();
 
         //when
-        object = cacheServiceLFU.get();
+        CacheServiceLFU.init().put(1, cacheObject);
+        object = CacheServiceLFU.init().get(1);
 
         //then
         Assertions.assertNotEquals(object, null);
@@ -25,13 +25,14 @@ class CacheServiceLFUTest {
         //given
         int capacity = 100000;
         CacheObject cacheObject = new CacheObject();
+        CacheServiceLFU cacheServiceLFU = CacheServiceLFU.init();
 
         //when
-        cacheServiceLFU.put(cacheObject);
+        cacheServiceLFU.put(1, cacheObject);
 
         //then
 
-        Assertions.assertEquals(capacity, cacheServiceLFU.getCache.size());
+        Assertions.assertEquals(capacity, CacheServiceLFU.init().getCacheValue().size());
 
     }
 }
