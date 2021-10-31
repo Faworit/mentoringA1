@@ -1,11 +1,15 @@
 package com.epam.ryabtsev;
 
+import com.epam.ryabtsev.service.CacheServiceLFU;
+import org.apache.log4j.BasicConfigurator;
+
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 public class ServiceStart {
 
     public static void main(String[] args) throws InterruptedException {
+        BasicConfigurator.configure();
         EvictionPolicy.LFU();
         EvictionPolicy.LRU();
         /*long time = System.currentTimeMillis();

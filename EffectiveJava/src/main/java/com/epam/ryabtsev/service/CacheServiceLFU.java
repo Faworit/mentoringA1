@@ -30,7 +30,7 @@ public class CacheServiceLFU {
         return cacheServiceLFU;
     }
 
-    public void put(int key, CacheObject cacheObject) {
+    public synchronized void put(int key, CacheObject cacheObject) {
         CacheObject v = cacheValue.get(key);
         if (v == null) {
             if (cache.size() == CAPACITY) {
@@ -54,15 +54,13 @@ public class CacheServiceLFU {
     }
 
 
-    public Object get(int key) {
-        CacheObject v = cacheValue.get(key);
-        if (v != null) {
-            ObjectRate objectRate = cache.get(key);
-            objectRate.setHitCount(objectRate.getHitCount() + 1);
-            objectRate.setLastTime(System.nanoTime());
-            return v;
-        }
-        return -1;
+    public synchronized Object get(int key) {
+        CacheObject cacheObject = cacheValue.get(key);
+        ObjectRate objectRate = cache.get(key);
+        objectRate.setHitCount(objectRate.getHitCount() + 1);
+        objectRate.setLastTime(System.nanoTime());
+
+        return cacheObject;  
     }
 
     public ConcurrentHashMap<Integer, CacheObject> getCacheValue() {
