@@ -1,5 +1,6 @@
 package com.epam.ryabtsev.service;
 
+import com.epam.ryabtsev.entity.CacheObject;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +18,20 @@ class CacheServiceLFUTest {
 
         //then
         Assertions.assertNotEquals(object, null);
-
     }
 
+    @Test
+    void capacity() {
+        //given
+        int capacity = 100000;
+        CacheObject cacheObject = new CacheObject();
+
+        //when
+        cacheServiceLFU.put(cacheObject);
+
+        //then
+
+        Assertions.assertEquals(capacity, cacheServiceLFU.getCache.size());
+
+    }
 }
