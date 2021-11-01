@@ -1,7 +1,7 @@
 package com.epam.ryabtsev.service;
 
 import com.epam.ryabtsev.entity.CacheObject;
-import com.epam.ryabtsev.entity.ObjectRate;
+import com.epam.ryabtsev.entity.EvictionPolicy;
 import org.apache.log4j.Logger;
 
 import java.util.Collections;
@@ -13,13 +13,14 @@ public class CacheServiceLFU {
     private static Logger logger = Logger.getLogger(CacheServiceLFU.class);
     private final int CAPACITY = 100000;
     private ConcurrentHashMap<Integer, CacheObject> cacheValue = new ConcurrentHashMap<>(CAPACITY);
-    private ConcurrentHashMap<Integer, ObjectRate> cache = new ConcurrentHashMap<>(CAPACITY);
+    private ConcurrentHashMap<Integer, EvictionPolicy> cache = new ConcurrentHashMap<>(CAPACITY);
     private static CacheServiceLFU cacheServiceLFU = null;
 
     private CacheServiceLFU() {
         while (cache.size() < 100000) {
             Random random = new Random();
-            put(random.nextInt(1000000), new CacheObject());
+            int value = random.nextInt(100000);
+            put(value, new CacheObject(String.valueOf(value)));
         }
     }
 
@@ -37,11 +38,11 @@ public class CacheServiceLFU {
                 Integer k = getKickedKey();
                 cacheValue.remove(k);
                 cache.remove(k);
-                logger.info("Was removed" + cache.get(k));
+                logger.info("Was removed: " + k);
             }
-            cache.put(key, new ObjectRate(key, 1, System.nanoTime()));
+            cache.put(key, new EvictionPolicy(key, 1, System.nanoTime()));
         } else {
-            ObjectRate objectRate = cache.get(key);
+            EvictionPolicy objectRate = cache.get(key);
             objectRate.setHitCount(objectRate.getHitCount() + 1);
             objectRate.setLastTime(System.nanoTime());
         }
@@ -49,16 +50,21 @@ public class CacheServiceLFU {
     }
 
     private Integer getKickedKey() {
-        ObjectRate min = Collections.min(cache.values());
+        EvictionPolicy min = Collections.min(cache.values());
         return min.getKey();
     }
 
 
-    public synchronized Object get(int key) {
+    public synchronized CacheObject get(int key) {
         CacheObject cacheObject = cacheValue.get(key);
-        ObjectRate objectRate = cache.get(key);
-        objectRate.setHitCount(objectRate.getHitCount() + 1);
-        objectRate.setLastTime(System.nanoTime());
+        EvictionPolicy evictionPolicy = cache.get(key);
+        if (evictionPolicy.getHitCount() != null) {
+            evictionPolicy.setHitCount(evictionPolicy.getHitCount() + 1);
+        } else {
+            evictionPolicy.setHitCount(1);
+        }
+
+        evictionPolicy.setLastTime(System.nanoTime());
 
         return cacheObject;  
     }
