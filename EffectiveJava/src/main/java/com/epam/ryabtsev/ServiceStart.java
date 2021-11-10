@@ -17,7 +17,8 @@ public class ServiceStart {
         ex.execute(new CacheConcurrency());
 
         TestLFU.createParameter();
-       // EvictionPolicy.LRU();
+        TestLRU testLRU = new TestLRU();
+        testLRU.checkLRU();
     }
 
 }

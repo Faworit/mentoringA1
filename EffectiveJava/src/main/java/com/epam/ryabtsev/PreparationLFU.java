@@ -12,7 +12,7 @@ public class PreparationLFU {
 
     public synchronized static void LFU() {
         long start = System.nanoTime();
-        CacheServiceLFU cacheServiceLFU = CacheServiceLFU.init();
+        CacheServiceLFU cacheServiceLFU = CacheServiceLFU.getInstance();
         long end = System.nanoTime();
         long averageTimeForValue = 100000/(TimeUnit.SECONDS.convert(end - start, TimeUnit.MILLISECONDS));
         logger.info("Average time spent for putting new values into the cache: " + averageTimeForValue + " nano seconds");
