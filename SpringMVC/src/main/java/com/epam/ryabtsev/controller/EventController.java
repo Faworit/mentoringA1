@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -23,7 +24,9 @@ public class EventController {
     @GetMapping("/get/{eventId}")
     public String getById(@PathVariable long eventId, Model model) {
         Event event = bookingFacade.getEventById(eventId);
-        model.addAttribute("event", event);
+        List<Event> events = new ArrayList<>();
+        events.add(event);
+        model.addAttribute("events", events);
 
         return "event";
     }
@@ -47,7 +50,9 @@ public class EventController {
     @PostMapping("/create")
     public String createEvent(Event event, Model model) {
         Event createdEvent = bookingFacade.createEvent(event);
-        model.addAttribute("event", createdEvent);
+        List<Event> events = new ArrayList<>();
+        events.add(createdEvent);
+        model.addAttribute("events", events);
 
         return "event";
     }
@@ -55,7 +60,9 @@ public class EventController {
     @PostMapping("/update")
     public String updateEvent(Event event, Model model) {
         Event updatedEvent = bookingFacade.updateEvent(event);
-        model.addAttribute("event", updatedEvent);
+        List<Event> events = new ArrayList<>();
+        events.add(updatedEvent);
+        model.addAttribute("events", events);
 
         return "event";
     }

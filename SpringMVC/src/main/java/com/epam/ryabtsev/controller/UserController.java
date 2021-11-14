@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -21,7 +22,9 @@ public class UserController {
     @GetMapping("/get/{userId}")
     public String getUserById(@PathVariable long userId, Model model) {
         User user = bookingFacade.getUserById(userId);
-        model.addAttribute("user", user);
+        List<User> users = new ArrayList<>();
+        users.add(user);
+        model.addAttribute("users", users);
 
         return "user";
     }
@@ -29,7 +32,9 @@ public class UserController {
     @GetMapping("/get/email/{email}")
     public String getByEmail(@PathVariable String email, Model model) {
         User user = bookingFacade.getUserByEmail(email);
-        model.addAttribute("user", user);
+        List<User> users = new ArrayList<>();
+        users.add(user);
+        model.addAttribute("users", users);
         return "user";
 
     }
@@ -45,7 +50,9 @@ public class UserController {
     @PostMapping("/create")
     public String createUser(User user, Model model) {
         User newUser = bookingFacade.createUser(user);
-        model.addAttribute("user", newUser);
+        List<User> users = new ArrayList<>();
+        users.add(newUser);
+        model.addAttribute("users", users);
 
         return "user";
     }
@@ -53,7 +60,9 @@ public class UserController {
     @PostMapping("update")
     public String updateUser(User user, Model model) {
         User updatedUser = bookingFacade.updateUser(user);
-        model.addAttribute("user", updatedUser);
+        List<User> users = new ArrayList<>();
+        users.add(updatedUser);
+        model.addAttribute("users", users);
 
         return "user";
     }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -26,7 +27,9 @@ public class TicketController {
                 ticket.getEventId(),
                 ticket.getPlace(),
                 ticket.getCategory());
-        model.addAttribute("ticket", bookedTicket);
+        List<Ticket> tickets = new ArrayList<>();
+        tickets.add(bookedTicket);
+        model.addAttribute("tickets", tickets);
 
         return "ticket";
     }
@@ -34,7 +37,7 @@ public class TicketController {
     @GetMapping("/getUserTickets")
     public String getBookedTickets(User user, Model model) {
         List<Ticket> tickets = bookingFacade.getBookedTickets(user, 0, 0);
-        model.addAttribute("ticket", tickets);
+        model.addAttribute("tickets", tickets);
 
         return "ticket";
     }
@@ -42,7 +45,7 @@ public class TicketController {
     @GetMapping("/getEventTickets")
     public String getBookedTickets(Event event, Model model) {
         List<Ticket> tickets = bookingFacade.getBookedTickets(event, 0, 0);
-        model.addAttribute("ticket", tickets);
+        model.addAttribute("tickets", tickets);
 
         return "ticket";
     }
