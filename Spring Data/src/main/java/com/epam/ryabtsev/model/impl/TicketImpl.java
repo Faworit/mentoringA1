@@ -2,7 +2,12 @@ package com.epam.ryabtsev.model.impl;
 
 import com.epam.ryabtsev.model.Ticket;
 
+import javax.persistence.*;
+
+@Entity
 public class TicketImpl implements Ticket {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
     private long eventId;
     private long userId;

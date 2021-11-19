@@ -4,26 +4,36 @@ import com.epam.ryabtsev.facade.BookingFacade;
 import com.epam.ryabtsev.model.Event;
 import com.epam.ryabtsev.model.Ticket;
 import com.epam.ryabtsev.model.User;
+import com.epam.ryabtsev.model.UserAccount;
 import com.epam.ryabtsev.service.EventService;
 import com.epam.ryabtsev.service.TicketService;
+import com.epam.ryabtsev.service.UserAccountService;
 import com.epam.ryabtsev.service.UserService;
 import com.epam.ryabtsev.service.impl.UserServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.List;
 
+@Component
 public class BookingFacadeImpl implements BookingFacade {
-    private ApplicationContext applicationContext = new ClassPathXmlApplicationContext("ApplicationContext.xml");
-    private UserService userService = applicationContext.getBean(UserServiceImpl.class);
 
+    private UserService userService;
+    private UserAccountService userAccountService;
     private EventService eventService;
     private TicketService ticketService;
 
-    public BookingFacadeImpl(EventService eventService, TicketService ticketService) {
+    public BookingFacadeImpl() {
+    }
+
+    @Autowired
+    public BookingFacadeImpl(EventService eventService, TicketService ticketService, UserService userService) {
         this.eventService = eventService;
         this.ticketService = ticketService;
+        this.userService = userService;
     }
 
     @Override
@@ -109,5 +119,10 @@ public class BookingFacadeImpl implements BookingFacade {
     @Override
     public void preloadTickets() {
 
+    }
+
+    @Override
+    public UserAccount refillAccount(long sum, long userId) {
+        return userAccountService.refillUserAccount(sum, userId);
     }
 }

@@ -5,7 +5,6 @@ import com.epam.ryabtsev.DAO.storage.Storage;
 import com.epam.ryabtsev.model.Event;
 import com.epam.ryabtsev.model.Ticket;
 import com.epam.ryabtsev.model.User;
-import com.epam.ryabtsev.model.impl.TicketImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -14,7 +13,7 @@ import java.util.stream.Collectors;
 
 public class TicketDAOImpl implements TicketDAO {
     @Autowired
-    Storage storage;
+    private Storage storage;
 
     private Map<Long, Ticket> tickets = storage.getTickets();
 
@@ -22,7 +21,7 @@ public class TicketDAOImpl implements TicketDAO {
     public Ticket bookTicket(long userId, long eventId, int place, Ticket.Category category) {
         long max = tickets.keySet().stream().max(Long::compareTo).orElse(0L);
         var key = max + 1;
-        Ticket ticket = new TicketImpl(key, eventId, userId, category, place);
+        Ticket ticket = new com.epam.ryabtsev.model.impl.TicketImpl(key, eventId, userId, category, place);
         tickets.put(key, ticket);
 
         return ticket;

@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class UserDAOImpl implements UserDAO {
     @Autowired
-    Storage storage;
+    private Storage storage;
 
    private Map<Long, User> users = storage.getUsers();
 

@@ -3,6 +3,7 @@ package com.epam.ryabtsev.facade;
 import com.epam.ryabtsev.model.Event;
 import com.epam.ryabtsev.model.Ticket;
 import com.epam.ryabtsev.model.User;
+import com.epam.ryabtsev.model.UserAccount;
 
 import java.util.Date;
 import java.util.List;
@@ -140,5 +141,7 @@ public interface BookingFacade {
     boolean cancelTicket(long ticketId);
 
     void preloadTickets();
+
+    UserAccount refillAccount(long sum, long userId);
 
 }

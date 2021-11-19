@@ -4,7 +4,6 @@ import com.epam.ryabtsev.model.Event;
 import com.epam.ryabtsev.model.Ticket;
 import com.epam.ryabtsev.model.User;
 import com.epam.ryabtsev.model.impl.EventImpl;
-import com.epam.ryabtsev.model.impl.TicketImpl;
 import com.epam.ryabtsev.model.impl.UserImpl;
 import org.springframework.stereotype.Component;
 
@@ -33,7 +32,7 @@ public class Storage {
         this.users.put(1L, new UserImpl(1, "Ivan", "test@mail.ru"));
         this.events.put(1L, new EventImpl(1, "test", new GregorianCalendar
                 (2014, Calendar.FEBRUARY, 11).getTime()));
-        this.tickets.put(1L, new TicketImpl(1, 1, 1, Ticket.Category.STANDARD, 1));
+        this.tickets.put(1L, new com.epam.ryabtsev.model.impl.TicketImpl(1, 1, 1, Ticket.Category.STANDARD, 1));
 
     }
 
