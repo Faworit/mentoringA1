@@ -9,6 +9,9 @@ public class TicketImpl implements Ticket {
     private Category category;
     private int place;
 
+    public TicketImpl() {
+    }
+
     public TicketImpl(long id, long eventId, long userId, Category category, int place) {
         this.id = id;
         this.eventId = eventId;
@@ -65,5 +68,16 @@ public class TicketImpl implements Ticket {
     @Override
     public void setPlace(int place) {
         this.place = place;
+    }
+
+    @Override
+    public String toString() {
+        return "TicketImpl{" +
+                "id=" + id +
+                ", eventId=" + eventId +
+                ", userId=" + userId +
+                ", category=" + category +
+                ", place=" + place +
+                '}';
     }
 }

@@ -105,4 +105,9 @@ public class BookingFacadeImpl implements BookingFacade {
     public boolean cancelTicket(long ticketId) {
         return ticketService.cancelTicket(ticketId);
     }
+
+    @Override
+    public void preloadTickets() {
+
+    }
 }
