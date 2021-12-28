@@ -5,6 +5,7 @@ import com.epam.ryabtsev.model.Event;
 import com.epam.ryabtsev.model.Ticket;
 import com.epam.ryabtsev.model.User;
 import com.epam.ryabtsev.model.UserAccount;
+import com.epam.ryabtsev.model.impl.TicketImpl;
 import com.epam.ryabtsev.service.EventService;
 import com.epam.ryabtsev.service.TicketService;
 import com.epam.ryabtsev.service.UserAccountService;
@@ -15,6 +16,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -122,7 +124,7 @@ public class BookingFacadeImpl implements BookingFacade {
     }
 
     @Override
-    public UserAccount refillAccount(long sum, long userId) {
+    public UserAccount refillAccount(BigDecimal sum, long userId) {
         return userAccountService.refillUserAccount(sum, userId);
     }
 }

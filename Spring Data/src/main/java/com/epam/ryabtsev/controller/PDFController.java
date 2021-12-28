@@ -40,8 +40,8 @@ public class PDFController {
         ArrayList<Ticket> tickets = (ArrayList<Ticket>) bookingFacade.getBookedTickets(user, 0, 0);
         List list = new List(true, 30);
         for (int i = 0; i < tickets.size(); i++) {
-            list.add(new ListItem(tickets.get(i).getUserId()));
-            list.add(new ListItem(tickets.get(i).getEventId()));
+            list.add(new ListItem(tickets.get(i).getUser().getId()));
+            list.add(new ListItem(tickets.get(i).getEvent().getId()));
             list.add(new ListItem(tickets.get(i).getPlace()));
             list.add(new ListItem(tickets.get(i).getCategory().toString()));
         }

@@ -4,6 +4,7 @@ import com.epam.ryabtsev.facade.BookingFacade;
 import com.epam.ryabtsev.model.Event;
 import com.epam.ryabtsev.model.Ticket;
 import com.epam.ryabtsev.model.User;
+import com.epam.ryabtsev.model.impl.TicketImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,10 +22,10 @@ public class TicketController {
     @Autowired
     BookingFacade bookingFacade;
 
-    @PostMapping("/bookTciket")
-    public String bookTicket(Ticket ticket, Model model) {
-        Ticket bookedTicket = bookingFacade.bookTicket(ticket.getUserId(),
-                ticket.getEventId(),
+    @PostMapping("/bookTicket")
+    public String bookTicket(TicketImpl ticket, Model model) {
+        Ticket bookedTicket = bookingFacade.bookTicket(ticket.getUser().getId(),
+                ticket.getEvent().getId(),
                 ticket.getPlace(),
                 ticket.getCategory());
         List<Ticket> tickets = new ArrayList<>();

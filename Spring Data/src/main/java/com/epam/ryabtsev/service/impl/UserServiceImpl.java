@@ -2,6 +2,7 @@ package com.epam.ryabtsev.service.impl;
 
 import com.epam.ryabtsev.DAO.UserDAO;
 import com.epam.ryabtsev.model.User;
+import com.epam.ryabtsev.model.impl.UserImpl;
 import com.epam.ryabtsev.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -37,16 +38,24 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User createUser(User user) {
-        return userDAO.createUser(user);
+        return userDAO.save((UserImpl) user);
     }
 
     @Override
     public User updateUser(User user) {
-        return userDAO.updateUser(user);
+        return userDAO.save((UserImpl) user);
     }
 
     @Override
     public boolean deleteUser(long userId) {
-        return userDAO.deleteUser(userId);
+        boolean result;
+        try {
+            userDAO.getUserImplById(userId);
+            result = true;
+        } catch (Exception e) {
+            result = false;
+        }
+
+        return result;
     }
 }

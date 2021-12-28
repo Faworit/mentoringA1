@@ -2,10 +2,7 @@ package com.epam.ryabtsev.model.impl;
 
 import com.epam.ryabtsev.model.Event;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -17,6 +14,9 @@ public class EventImpl implements Event {
     private String title;
     private Date date;
     private BigDecimal ticketPrice;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "event")
+    private UserImpl user;
 
     public EventImpl() {
     }

@@ -2,22 +2,31 @@ package com.epam.ryabtsev.model.impl;
 
 import com.epam.ryabtsev.model.Ticket;
 
+import javax.persistence.*;
+import java.util.Objects;
+
+@Entity
 public class TicketImpl implements Ticket {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
-    private long eventId;
-    private long userId;
     private Category category;
     private int place;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "event")
+    private EventImpl event;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user")
+    private UserImpl user;
 
     public TicketImpl() {
     }
 
-    public TicketImpl(long id, long eventId, long userId, Category category, int place) {
-        this.id = id;
-        this.eventId = eventId;
-        this.userId = userId;
+    public TicketImpl(Category category, int place, EventImpl event, UserImpl user) {
         this.category = category;
         this.place = place;
+        this.event = event;
+        this.user = user;
     }
 
     @Override
@@ -28,26 +37,6 @@ public class TicketImpl implements Ticket {
     @Override
     public void setId(long id) {
         this.id = id;
-    }
-
-    @Override
-    public long getEventId() {
-        return eventId;
-    }
-
-    @Override
-    public void setEventId(long eventId) {
-        this.eventId = eventId;
-    }
-
-    @Override
-    public long getUserId() {
-        return userId;
-    }
-
-    @Override
-    public void setUserId(long userId) {
-        this.userId = userId;
     }
 
     @Override
@@ -70,14 +59,32 @@ public class TicketImpl implements Ticket {
         this.place = place;
     }
 
+    public EventImpl getEvent() {
+        return event;
+    }
+
+    public void setEvent(EventImpl event) {
+        this.event = event;
+    }
+
+    public UserImpl getUser() {
+        return user;
+    }
+
+    public void setUser(UserImpl user) {
+        this.user = user;
+    }
+
     @Override
-    public String toString() {
-        return "TicketImpl{" +
-                "id=" + id +
-                ", eventId=" + eventId +
-                ", userId=" + userId +
-                ", category=" + category +
-                ", place=" + place +
-                '}';
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TicketImpl ticket = (TicketImpl) o;
+        return id == ticket.id && place == ticket.place && category == ticket.category && Objects.equals(event, ticket.event) && Objects.equals(user, ticket.user);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, category, place, event, user);
     }
 }

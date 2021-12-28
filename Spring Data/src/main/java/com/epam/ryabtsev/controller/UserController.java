@@ -2,6 +2,7 @@ package com.epam.ryabtsev.controller;
 
 import com.epam.ryabtsev.facade.BookingFacade;
 import com.epam.ryabtsev.model.User;
+import com.epam.ryabtsev.model.impl.UserImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

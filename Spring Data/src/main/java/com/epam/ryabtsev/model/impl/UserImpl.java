@@ -2,10 +2,8 @@ package com.epam.ryabtsev.model.impl;
 
 import com.epam.ryabtsev.model.User;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class UserImpl implements User {
@@ -14,14 +12,22 @@ public class UserImpl implements User {
     private long id;
     private String name;
     private String email;
+    @OneToOne(cascade = CascadeType.REFRESH, orphanRemoval = true)
+    @JoinColumn(name = "userAccountId")
+    private UserAccountImpl userAccount;
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private List<EventImpl> event;
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private List<TicketImpl> tickets;
 
     public UserImpl() {
     }
 
-    public UserImpl(long id, String name, String email) {
+    public UserImpl(long id, String name, String email, UserAccountImpl userAccount) {
         this.id = id;
         this.name = name;
         this.email = email;
+        this.userAccount = userAccount;
     }
 
     @Override

@@ -1,5 +1,8 @@
 package com.epam.ryabtsev.model;
 
+import com.epam.ryabtsev.model.impl.EventImpl;
+import com.epam.ryabtsev.model.impl.UserImpl;
+
 /**
  * Created by maksym_govorischev.
  */
@@ -12,13 +15,13 @@ public interface Ticket {
      */
     long getId();
     void setId(long id);
-    long getEventId();
-    void setEventId(long eventId);
-    long getUserId();
-    void setUserId(long userId);
     Category getCategory();
     void setCategory(Category category);
     int getPlace();
     void setPlace(int place);
+    EventImpl getEvent();
+    void setEvent(EventImpl event);
+    UserImpl getUser();
+    void setUser(UserImpl user);
 
 }

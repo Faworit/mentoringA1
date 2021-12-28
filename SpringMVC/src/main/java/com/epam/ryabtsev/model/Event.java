@@ -1,5 +1,7 @@
 package com.epam.ryabtsev.model;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -14,6 +16,8 @@ public interface Event {
     void setId(long id);
     String getTitle();
     void setTitle(String title);
-    Date getDate();
-    void setDate(Date date);
+    LocalDate getDate();
+    void setDate(LocalDate date);
+    BigDecimal getTicketPrice();
+    void setTicketPrice(BigDecimal ticketPrice);
 }

@@ -13,6 +13,7 @@ public interface User {
     String getName();
     void setName(String name);
 
+
     /**
      * User email. UNIQUE.
      * @return User email.

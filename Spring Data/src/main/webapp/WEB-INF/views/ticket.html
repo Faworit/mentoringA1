@@ -23,8 +23,8 @@
     </tr>
     <tr th:each="ticket : ${tickets}">
         <td th:text="${ticket.getId()}"></td>
-        <td th:text="${ticket.getEventId()}"></td>
-        <td th:text="${ticket.getUserId()}"></td>
+        <td th:text="${ticket.getEvent().getId()}"></td>
+        <td th:text="${ticket.getUser().getId()}"></td>
         <td th:text="${ticket.getCategory()}"></td>
         <td th:text="${ticket.getPlace()}"></td>
     </tr>

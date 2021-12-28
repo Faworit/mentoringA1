@@ -5,6 +5,7 @@ import com.epam.ryabtsev.model.Ticket;
 import com.epam.ryabtsev.model.User;
 import com.epam.ryabtsev.model.UserAccount;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -142,6 +143,6 @@ public interface BookingFacade {
 
     void preloadTickets();
 
-    UserAccount refillAccount(long sum, long userId);
+    UserAccount refillAccount(BigDecimal sum, long userId);
 
 }

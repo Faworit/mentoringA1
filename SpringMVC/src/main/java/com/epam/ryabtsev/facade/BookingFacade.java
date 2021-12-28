@@ -3,7 +3,10 @@ package com.epam.ryabtsev.facade;
 import com.epam.ryabtsev.model.Event;
 import com.epam.ryabtsev.model.Ticket;
 import com.epam.ryabtsev.model.User;
+import com.epam.ryabtsev.model.UserAccount;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -37,7 +40,7 @@ public interface BookingFacade {
      * @param pageNum Pagination param. Number of the page to return. Starts from 1.
      * @return List of events.
      */
-    List<Event> getEventsForDay(Date day, int pageSize, int pageNum);
+    List<Event> getEventsForDay(LocalDate day, int pageSize, int pageNum);
 
     /**
      * Creates new event. Event id should be auto-generated.
@@ -140,5 +143,7 @@ public interface BookingFacade {
     boolean cancelTicket(long ticketId);
 
     void preloadTickets();
+
+    UserAccount refillAccount(BigDecimal sum, long userId);
 
 }

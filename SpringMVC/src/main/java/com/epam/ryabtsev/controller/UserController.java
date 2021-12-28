@@ -2,13 +2,11 @@ package com.epam.ryabtsev.controller;
 
 import com.epam.ryabtsev.facade.BookingFacade;
 import com.epam.ryabtsev.model.User;
+import com.epam.ryabtsev.model.impl.UserImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,8 +17,8 @@ public class UserController {
     @Autowired
     BookingFacade bookingFacade;
 
-    @GetMapping("/get/{userId}")
-    public String getUserById(@PathVariable long userId, Model model) {
+    @GetMapping("/get")
+    public String getUserById(@RequestParam long userId, Model model) {
         User user = bookingFacade.getUserById(userId);
         List<User> users = new ArrayList<>();
         users.add(user);
@@ -29,8 +27,8 @@ public class UserController {
         return "user";
     }
 
-    @GetMapping("/get/email/{email}")
-    public String getByEmail(@PathVariable String email, Model model) {
+    @GetMapping("/get/email")
+    public String getByEmail(@RequestParam String email, Model model) {
         User user = bookingFacade.getUserByEmail(email);
         List<User> users = new ArrayList<>();
         users.add(user);
@@ -48,8 +46,11 @@ public class UserController {
     }
 
     @PostMapping("/create")
-    public String createUser(User user, Model model) {
-        User newUser = bookingFacade.createUser(user);
+    public String createUser(@RequestParam String name, @RequestParam String email, Model model) {
+        User createUser = new UserImpl();
+        createUser.setName(name);
+        createUser.setEmail(email);
+        User newUser = bookingFacade.createUser(createUser);
         List<User> users = new ArrayList<>();
         users.add(newUser);
         model.addAttribute("users", users);
@@ -57,8 +58,12 @@ public class UserController {
         return "user";
     }
 
-    @PostMapping("update")
-    public String updateUser(User user, Model model) {
+    @PostMapping("/update")
+    public String updateUser(@RequestParam String name, @RequestParam String email, @RequestParam String id, Model model) {
+        User user = new UserImpl();
+        user.setId(Long.parseLong(id));
+        user.setEmail(email);
+        user.setName(name);
         User updatedUser = bookingFacade.updateUser(user);
         List<User> users = new ArrayList<>();
         users.add(updatedUser);
@@ -67,15 +72,14 @@ public class UserController {
         return "user";
     }
 
-    @PostMapping("/delete/{userId}")
-    public String deleteUser(@PathVariable long userId, Model model) {
-        boolean result = bookingFacade.deleteUser(userId);
+    @PostMapping("/delete")
+    public String deleteUser(@RequestParam String id, Model model) {
+        boolean result = bookingFacade.deleteUser(Long.parseLong(id));
         if (result) {
-            model.addAttribute("result", "user with id: " + userId + " was successfully deleted");
+            model.addAttribute("result", "user with id: " + id + " was successfully deleted");
         } else {
-            model.addAttribute("result", "user with id: " + userId + " was not deleted");
+            model.addAttribute("result", "user with id: " + id + " was not deleted");
         }
-
-        return "actionResult";
+        return "index";
     }
 }

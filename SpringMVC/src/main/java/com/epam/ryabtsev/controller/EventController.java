@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -32,8 +33,8 @@ public class EventController {
     }
 
     @GetMapping("/get/{eventDate}")
-    public String getEventByDate(@PathVariable Date eventDate, Model model) {
-        List<Event> events = bookingFacade.getEventsForDay(eventDate, 0, 0);
+    public String getEventByDate(@PathVariable LocalDate eventDate, Model model) {
+        List<Event> events = bookingFacade.getEventsForDay(eventDate, 1, 1);
         model.addAttribute("events", events);
 
         return "event";
@@ -41,7 +42,7 @@ public class EventController {
 
     @GetMapping("/get/{title}")
     public String getEventByTitle(@PathVariable String title, Model model) {
-        List<Event> events = bookingFacade.getEventsByTitle(title, 0, 0);
+        List<Event> events = bookingFacade.getEventsByTitle(title, 1, 1);
         model.addAttribute("events", events);
 
         return "event";
