@@ -15,9 +15,9 @@ public class UserImpl implements User {
     @OneToOne(cascade = CascadeType.REFRESH, orphanRemoval = true)
     @JoinColumn(name = "userAccountId")
     private UserAccountImpl userAccount;
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user")
     private List<EventImpl> event;
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user")
     private List<TicketImpl> tickets;
 
     public UserImpl() {
@@ -58,5 +58,35 @@ public class UserImpl implements User {
     @Override
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public UserAccountImpl getUserAccount() {
+        return userAccount;
+    }
+
+    @Override
+    public void setUserAccount(UserAccountImpl userAccount) {
+        this.userAccount = userAccount;
+    }
+
+    @Override
+    public List<EventImpl> getEvent() {
+        return event;
+    }
+
+    @Override
+    public void setEvent(List<EventImpl> event) {
+        this.event = event;
+    }
+
+    @Override
+    public List<TicketImpl> getTickets() {
+        return tickets;
+    }
+
+    @Override
+    public void setTickets(List<TicketImpl> tickets) {
+        this.tickets = tickets;
     }
 }

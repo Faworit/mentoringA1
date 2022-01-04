@@ -12,6 +12,6 @@ import java.util.List;
 public interface UserDAO extends JpaRepository<UserImpl, Long> {
     UserImpl getUserImplById(long userId);
     UserImpl getUserImplByEmail(String email);
-    List<User> getUserImplByName(String name, Pageable pageable);
+    List<User> getUserImplByName(String name);
     void deleteById(Long userId);
 }

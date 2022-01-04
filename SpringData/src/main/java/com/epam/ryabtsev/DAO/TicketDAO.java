@@ -5,12 +5,13 @@ import com.epam.ryabtsev.model.Ticket;
 import com.epam.ryabtsev.model.User;
 import com.epam.ryabtsev.model.impl.TicketImpl;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface TicketDAO extends JpaRepository<TicketImpl, Long> {
-    Ticket bookTicket(long userId, long eventId, int place, Ticket.Category category);
-    List<Ticket> getBookedTickets(User user, int pageSize, int pageNum);
-    List<Ticket> getBookedTickets(Event event, int pageSize, int pageNum);
-    boolean cancelTicket(long ticketId);
+    List<Ticket> getTicketImplByUser(User user);
+    List<Ticket> getTicketImplByEvent(Event event);
+    boolean deleteById(long ticketId);
 }

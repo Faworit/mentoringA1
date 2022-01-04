@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getUsersByName(String name, int pageSize, int pageNum) {
         Pageable pageable = (Pageable) PageRequest.of(pageNum, pageSize);
-        return userDAO.getUserImplByName(name, pageable);
+        return userDAO.getUserImplByName(name);
     }
 
     @Override
