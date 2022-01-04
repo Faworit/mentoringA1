@@ -3,9 +3,9 @@ package com.epam.ryabtsev.model.impl;
 import com.epam.ryabtsev.model.Event;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class EventImpl implements Event {
@@ -14,15 +14,17 @@ public class EventImpl implements Event {
     private long id;
     private String title;
     private LocalDate date;
-    private BigDecimal ticketPrice;
+    private Integer ticketPrice;
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "event")
+    @JoinColumn(name = "user")
     private UserImpl user;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
+    List<TicketImpl> tickets = new ArrayList<>();
 
     public EventImpl() {
     }
 
-    public EventImpl(long id, String title, LocalDate date, BigDecimal ticketPrice) {
+    public EventImpl(long id, String title, LocalDate date, Integer ticketPrice) {
         this.id = id;
         this.title = title;
         this.date = date;
@@ -60,12 +62,30 @@ public class EventImpl implements Event {
     }
 
     @Override
-    public BigDecimal getTicketPrice() {
+    public Integer getTicketPrice() {
         return ticketPrice;
     }
 
     @Override
-    public void setTicketPrice(BigDecimal ticketPrice) {
+    public void setTicketPrice(Integer ticketPrice) {
         this.ticketPrice = ticketPrice;
     }
+
+    public UserImpl getUser() {
+        return user;
+    }
+
+    public void setUser(UserImpl user) {
+        this.user = user;
+    }
+
+    public List<TicketImpl> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(List<TicketImpl> tickets) {
+        this.tickets = tickets;
+    }
+
+
 }

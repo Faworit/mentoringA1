@@ -1,20 +1,27 @@
 package com.epam.ryabtsev.controller;
 
+import com.epam.ryabtsev.facade.BookingFacade;
 import com.epam.ryabtsev.model.User;
 import com.epam.ryabtsev.model.impl.UserImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/action")
 public class ActionController {
+    @Autowired
+    BookingFacade bookingFacade;
+
     @GetMapping("create")
     public String create() {
         return "addUser";
+    }
+
+    @GetMapping("createEvent")
+    public String createEvent() {
+        return "newEvent";
     }
 
     @PostMapping("/update")

@@ -5,21 +5,15 @@
     <title>greeting</title>
 </head>
 <body>
-<form th:method="GET" th:action="@{/user/get}" method="get">
-    <label for="userId">Enter id: </label>
-    <input type="text" id="userId"/>
-    <br/>
-    <input type="submit" value="get user"/>
-</form>
-<form th:method="GET" th:action="@{/user/get/email}">
-    <label for="email">Enter email: </label>
-    <input type="text" id="email"/>
-    <br/>
-    <input type="submit" value="get user by email"/>
-</form>
 <p><td th:text="${result}"></td></p>
-<p><a href="#" th:href="@{'/user/get/1'}">Get user by Id</a></p>
+<!-- user -->
 <p><a href="#" th:href="@{'/action/create'}">Create user</a></p>
+<p><a href="#" th:href="@{'/user/id/1'}">Get action user by Id</a></p>
+
+<!-- event -->
+
+<p><a href="#" th:href="@{'/action/createEvent'}">Create event</a></p>
+<p><a href="#" th:href="@{'/event/id/1'}">Get action user by Id</a></p>
 
 </body>
 </html>

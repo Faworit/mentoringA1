@@ -21,6 +21,7 @@
         <td th:text="${user.getId()}"></td>
         <td th:text="${user.getName()}"></td>
         <td th:text="${user.getEmail()}"></td>
+        <td th:enctype="${user.getEvent()}"/>
         <td>
             <form method="post"  th:action="@{/user/delete}">
                 <input type="text" hidden name="id" th:value="${user.getId()}">

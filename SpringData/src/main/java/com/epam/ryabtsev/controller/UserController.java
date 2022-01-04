@@ -17,8 +17,8 @@ public class UserController {
     @Autowired
     BookingFacade bookingFacade;
 
-    @GetMapping("/get")
-    public String getUserById(@RequestParam long userId, Model model) {
+    @GetMapping("/id/{userId}")
+    public String getUserById(@PathVariable long userId, Model model) {
         User user = bookingFacade.getUserById(userId);
         List<User> users = new ArrayList<>();
         users.add(user);
@@ -27,8 +27,8 @@ public class UserController {
         return "user";
     }
 
-    @GetMapping("/get/email")
-    public String getByEmail(@RequestParam String email, Model model) {
+   @GetMapping("/email/{email}")
+    public String getByEmail(@PathVariable String email, Model model) {
         User user = bookingFacade.getUserByEmail(email);
         List<User> users = new ArrayList<>();
         users.add(user);
@@ -44,7 +44,6 @@ public class UserController {
 
         return "user";
     }
-
     @PostMapping("/create")
     public String createUser(@RequestParam String name, @RequestParam String email, Model model) {
         User createUser = new UserImpl();
