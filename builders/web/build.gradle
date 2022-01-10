@@ -1,0 +1,23 @@
+plugins {
+    id 'java'
+    id 'war'
+}
+
+war {
+    enabled = true
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    implementation('javax.servlet:javax.servlet-api:4.0.1')
+    implementation('services:com.epam.ryabtsev.services:1.0-SNAPSHOT')
+}
+
+test {
+    useJUnitPlatform()
+}
