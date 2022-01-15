@@ -1,0 +1,6 @@
+rootProject.name = 'buildersG'
+include 'admin'
+include 'services'
+include 'utiles'
+include 'web'
+
