@@ -13,8 +13,12 @@ import java.util.List;
 
 @Service
 public class EventServiceImpl implements EventService {
-    @Autowired
-    EventDAO eventDAO;
+
+    private final EventDAO eventDAO;
+
+    public EventServiceImpl(EventDAO eventDAO) {
+        this.eventDAO = eventDAO;
+    }
 
     @Override
     public Event getEventById(long eventId) {

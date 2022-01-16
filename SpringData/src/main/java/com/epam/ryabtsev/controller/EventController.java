@@ -20,8 +20,11 @@ import java.util.List;
 @RequestMapping("/event")
 public class EventController {
 
-    @Autowired
-    BookingFacade bookingFacade;
+    private final BookingFacade bookingFacade;
+
+    public EventController(BookingFacade bookingFacade) {
+        this.bookingFacade = bookingFacade;
+    }
 
     @GetMapping("/id/{eventId}")
     public String getById(@PathVariable long eventId, Model model) {

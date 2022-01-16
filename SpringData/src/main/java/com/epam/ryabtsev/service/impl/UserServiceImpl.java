@@ -13,10 +13,11 @@ import java.util.List;
 
 @Component
 public class UserServiceImpl implements UserService {
-    @Autowired
-    UserDAO userDAO;
 
-    public UserServiceImpl() {
+    private final UserDAO userDAO;
+
+    public UserServiceImpl(UserDAO userDAO) {
+        this.userDAO = userDAO;
     }
 
     @Override

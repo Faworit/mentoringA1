@@ -14,8 +14,12 @@ import java.util.List;
 @Controller
 @RequestMapping("/user")
 public class UserController {
-    @Autowired
-    BookingFacade bookingFacade;
+
+    private final BookingFacade bookingFacade;
+
+    public UserController(BookingFacade bookingFacade) {
+        this.bookingFacade = bookingFacade;
+    }
 
     @GetMapping("/id/{userId}")
     public String getUserById(@PathVariable long userId, Model model) {

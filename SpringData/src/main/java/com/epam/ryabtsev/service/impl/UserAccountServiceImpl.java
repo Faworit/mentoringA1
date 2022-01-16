@@ -10,7 +10,12 @@ import java.math.BigDecimal;
 
 @Service
 public class UserAccountServiceImpl implements UserAccountService {
-    UserAccountDAO userAccountDAO;
+
+    private final UserAccountDAO userAccountDAO;
+
+    public UserAccountServiceImpl(UserAccountDAO userAccountDAO) {
+        this.userAccountDAO = userAccountDAO;
+    }
 
     @Override
     public UserAccount createUserAccount(UserAccountImpl userAccount) {

@@ -15,8 +15,12 @@ import java.util.List;
 
 @Service
 public class TicketServiceImpl implements TicketService {
-    @Autowired
-    TicketDAO ticketDAO;
+
+    private final TicketDAO ticketDAO;
+
+    public TicketServiceImpl(TicketDAO ticketDAO) {
+        this.ticketDAO = ticketDAO;
+    }
 
     @Override
     public Ticket bookTicket(long userId, long eventId, int place, Ticket.Category category) {
