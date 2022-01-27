@@ -22,18 +22,18 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserById(long userId) {
 
-        return userDAO.getUserImplById(userId);
+        return userDAO.findById(userId);
     }
 
     @Override
     public User getUserByEmail(String email) {
-        return userDAO.getUserImplByEmail(email);
+        return userDAO.findByEmail(email);
     }
 
     @Override
     public List<User> getUsersByName(String name, int pageSize, int pageNum) {
         Pageable pageable = (Pageable) PageRequest.of(pageNum, pageSize);
-        return userDAO.getUserImplByName(name, pageable);
+        return userDAO.findByName(name, pageable);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
     public boolean deleteUser(long userId) {
         boolean result;
         try {
-            userDAO.getUserImplById(userId);
+            userDAO.findById(userId);
             result = true;
         } catch (Exception e) {
             result = false;

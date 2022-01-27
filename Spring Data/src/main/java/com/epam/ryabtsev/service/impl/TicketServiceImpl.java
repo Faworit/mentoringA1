@@ -17,21 +17,21 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public Ticket bookTicket(long userId, long eventId, int place, Ticket.Category category) {
-        return ticketDAO.bookTicket(userId, eventId, place, category);
+        return ticketDAO.save(userId, eventId, place, category);
     }
 
     @Override
     public List<Ticket> getBookedTickets(User user, int pageSize, int pageNum) {
-        return ticketDAO.getBookedTickets(user, pageSize, pageNum);
+        return ticketDAO.findByEvent(user);
     }
 
     @Override
     public List<Ticket> getBookedTickets(Event event, int pageSize, int pageNum) {
-        return ticketDAO.getBookedTickets(event, pageSize, pageNum);
+        return ticketDAO.findByEvent(event);
     }
 
     @Override
     public boolean cancelTicket(long ticketId) {
-        return ticketDAO.cancelTicket(ticketId);
+        return ticketDAO.deleteById(ticketId);
     }
 }

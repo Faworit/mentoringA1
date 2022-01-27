@@ -16,31 +16,31 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public Event getEventById(long eventId) {
-        return eventDAO.getEventById(eventId);
+        return eventDAO.findById(eventId);
     }
 
     @Override
     public List<Event> getEventsByTitle(String title, int pageSize, int pageNum) {
-        return eventDAO.getEventsByTitle(title, pageSize, pageNum);
+        return eventDAO.findByTitle(title, pageSize, pageNum);
     }
 
     @Override
     public List<Event> getEventsForDay(Date day, int pageSize, int pageNum) {
-        return eventDAO.getEventsForDay(day, pageSize, pageNum);
+        return eventDAO.findByDate(day, pageSize, pageNum);
     }
 
     @Override
     public Event createEvent(Event event) {
-        return eventDAO.createEvent(event);
+        return eventDAO.save(event);
     }
 
     @Override
     public Event updateEvent(Event event) {
-        return eventDAO.updateEvent(event);
+        return eventDAO.save(event);
     }
 
     @Override
     public boolean deleteEvent(long eventId) {
-        return eventDAO.deleteEvent(eventId);
+        return eventDAO.delete(eventId);
     }
 }

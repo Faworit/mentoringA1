@@ -8,10 +8,9 @@ import java.util.Date;
 import java.util.List;
 
 public interface EventDAO extends JpaRepository<EventImpl, Long> {
-    Event getEventById(long eventId);
-    List<Event> getEventsByTitle(String title, int pageSize, int pageNum);
-    List<Event> getEventsForDay(Date day, int pageSize, int pageNum);
-    Event createEvent(Event event);
-    Event updateEvent(Event event);
-    boolean deleteEvent(long eventId);
+    Event findById(long eventId);
+    List<Event> findByTitle(String title, int pageSize, int pageNum);
+    List<Event> findByDate(Date day, int pageSize, int pageNum);
+    Event save(Event event);
+    boolean delete(long eventId);
 }

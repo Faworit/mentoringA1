@@ -21,7 +21,7 @@ public class UserAccountServiceImpl implements UserAccountService {
 
     @Override
     public UserAccount refillUserAccount(BigDecimal balance, long userId) {
-        UserAccountImpl userAccount = userAccountDAO.getUserAccountImplByUserId(userId);
+        UserAccountImpl userAccount = userAccountDAO.findByUserId(userId);
         userAccount.setBalance(balance);
         userAccountDAO.save(userAccount);
         return userAccount;
@@ -29,12 +29,12 @@ public class UserAccountServiceImpl implements UserAccountService {
 
     @Override
     public UserAccount getUserAccount(long userAccountId) {
-        return userAccountDAO.getUserAccountImplByAccountId(userAccountId);
+        return userAccountDAO.findByAccountId(userAccountId);
     }
 
     @Override
     public boolean deleteUserAccount(long userAccountId) {
 
-        return userAccountDAO.deleteByAccountId(userAccountId);
+        return userAccountDAO.deleteById(userAccountId);
     }
 }

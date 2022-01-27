@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserAccountDAO extends CrudRepository<UserAccountImpl, Long> {
-    UserAccountImpl getUserAccountImplByUserId(long userId);
-    UserAccountImpl getUserAccountImplByAccountId(long accountId);
-    boolean deleteByAccountId(long accountId);
+    UserAccountImpl findByUserId(long userId);
+    UserAccountImpl findByAccountId(long accountId);
+    boolean deleteById(long accountId);
 }
