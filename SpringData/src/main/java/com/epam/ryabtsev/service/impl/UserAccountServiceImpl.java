@@ -10,7 +10,12 @@ import java.math.BigDecimal;
 
 @Service
 public class UserAccountServiceImpl implements UserAccountService {
-    UserAccountDAO userAccountDAO;
+
+    private final UserAccountDAO userAccountDAO;
+
+    public UserAccountServiceImpl(UserAccountDAO userAccountDAO) {
+        this.userAccountDAO = userAccountDAO;
+    }
 
     @Override
     public UserAccount createUserAccount(UserAccountImpl userAccount) {
@@ -34,7 +39,11 @@ public class UserAccountServiceImpl implements UserAccountService {
 
     @Override
     public boolean deleteUserAccount(long userAccountId) {
-
-        return userAccountDAO.deleteByAccountId(userAccountId);
+        boolean isSuccess = false;
+        userAccountDAO.deleteByAccountId(userAccountId);
+        if (userAccountDAO.existsById(userAccountId)) {
+            isSuccess = true;
+        }
+        return isSuccess;
     }
 }

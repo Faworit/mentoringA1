@@ -2,17 +2,23 @@ package com.epam.ryabtsev.service.impl;
 
 import com.epam.ryabtsev.DAO.EventDAO;
 import com.epam.ryabtsev.model.Event;
+import com.epam.ryabtsev.model.impl.EventImpl;
 import com.epam.ryabtsev.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
 @Service
 public class EventServiceImpl implements EventService {
-    @Autowired
-    EventDAO eventDAO;
+
+    private final EventDAO eventDAO;
+
+    public EventServiceImpl(EventDAO eventDAO) {
+        this.eventDAO = eventDAO;
+    }
 
     @Override
     public Event getEventById(long eventId) {
@@ -21,26 +27,26 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public List<Event> getEventsByTitle(String title, int pageSize, int pageNum) {
-        return eventDAO.getEventsByTitle(title, pageSize, pageNum);
+        return eventDAO.getEventsByTitle(title);
     }
 
     @Override
-    public List<Event> getEventsForDay(Date day, int pageSize, int pageNum) {
-        return eventDAO.getEventsForDay(day, pageSize, pageNum);
+    public List<Event> getEventsForDay(LocalDate day, int pageSize, int pageNum) {
+        return eventDAO.getEventImplByDate(day);
     }
 
     @Override
     public Event createEvent(Event event) {
-        return eventDAO.createEvent(event);
+        return eventDAO.save((EventImpl) event);
     }
 
     @Override
     public Event updateEvent(Event event) {
-        return eventDAO.updateEvent(event);
+        return eventDAO.save((EventImpl) event);
     }
 
     @Override
     public boolean deleteEvent(long eventId) {
-        return eventDAO.deleteEvent(eventId);
+        return eventDAO.deleteById(eventId);
     }
 }

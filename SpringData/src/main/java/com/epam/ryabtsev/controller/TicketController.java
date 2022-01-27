@@ -19,8 +19,12 @@ import java.util.List;
 @Controller
 @RequestMapping("/ticket")
 public class TicketController {
-    @Autowired
-    BookingFacade bookingFacade;
+
+    private final BookingFacade bookingFacade;
+
+    public TicketController(BookingFacade bookingFacade) {
+        this.bookingFacade = bookingFacade;
+    }
 
     @PostMapping("/bookTicket")
     public String bookTicket(TicketImpl ticket, Model model) {

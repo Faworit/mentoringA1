@@ -22,10 +22,11 @@ public class TicketImpl implements Ticket {
     public TicketImpl() {
     }
 
-    public TicketImpl(long id, Category category, int place) {
-        this.id = id;
+    public TicketImpl(Category category, int place, EventImpl event, UserImpl user) {
         this.category = category;
         this.place = place;
+        this.event = event;
+        this.user = user;
     }
 
     @Override

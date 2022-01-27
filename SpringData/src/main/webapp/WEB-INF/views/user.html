@@ -6,23 +6,35 @@
 </head>
 <body>
 
-<form th:method="GET" th:action="@{/user/get/{id}(id=${userId})}">
-    <label for="userId">Enter id: </label>
-    <input type="text" id="userId"/>
-    <br/>
-    <input type="submit" value="get user"/>
-</form>
+<p><a href="#" th:href="@{'/'}">HOME</a></p>
+
+
 
 <table border="1">
     <tr>
         <td>idUser</td>
         <td>Name</td>
         <td>Email</td>
+        <td>action</td>
     </tr>
     <tr th:each="user : ${users}">
         <td th:text="${user.getId()}"></td>
         <td th:text="${user.getName()}"></td>
         <td th:text="${user.getEmail()}"></td>
+        <td th:enctype="${user.getEvent()}"/>
+        <td>
+            <form method="post"  th:action="@{/user/delete}">
+                <input type="text" hidden name="id" th:value="${user.getId()}">
+                <input type="submit" value="delete user">
+            </form>
+            <form method="post"  th:action="@{/action/update}">
+                <input type="text" hidden name="id" th:value="${user.getId()}">
+                <input type="text" name="name" hidden th:value="${user.getName()}">
+                <input type="text" hidden name="email" th:value="${user.getEmail()}">
+                <input type="submit" value="update user">
+            </form>
+        </td>
+
     </tr>
 </table>
 

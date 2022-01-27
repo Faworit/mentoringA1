@@ -13,10 +13,11 @@ import java.util.List;
 
 @Component
 public class UserServiceImpl implements UserService {
-    @Autowired
-    UserDAO userDAO;
 
-    public UserServiceImpl() {
+    private final UserDAO userDAO;
+
+    public UserServiceImpl(UserDAO userDAO) {
+        this.userDAO = userDAO;
     }
 
     @Override
@@ -33,7 +34,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getUsersByName(String name, int pageSize, int pageNum) {
         Pageable pageable = (Pageable) PageRequest.of(pageNum, pageSize);
-        return userDAO.getUserImplByName(name, pageable);
+        return userDAO.getUserImplByName(name);
     }
 
     @Override

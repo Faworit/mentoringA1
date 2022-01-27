@@ -17,25 +17,23 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
 @Component
 public class BookingFacadeImpl implements BookingFacade {
 
-    private UserService userService;
-    private UserAccountService userAccountService;
-    private EventService eventService;
-    private TicketService ticketService;
+    private final UserService userService;
+    private final UserAccountService userAccountService;
+    private final EventService eventService;
+    private final TicketService ticketService;
 
-    public BookingFacadeImpl() {
-    }
-
-    @Autowired
-    public BookingFacadeImpl(EventService eventService, TicketService ticketService, UserService userService) {
+    public BookingFacadeImpl(UserService userService, UserAccountService userAccountService, EventService eventService, TicketService ticketService) {
+        this.userService = userService;
+        this.userAccountService = userAccountService;
         this.eventService = eventService;
         this.ticketService = ticketService;
-        this.userService = userService;
     }
 
     @Override
@@ -49,7 +47,7 @@ public class BookingFacadeImpl implements BookingFacade {
     }
 
     @Override
-    public List<Event> getEventsForDay(Date day, int pageSize, int pageNum) {
+    public List<Event> getEventsForDay(LocalDate day, int pageSize, int pageNum) {
         return eventService.getEventsForDay(day, pageSize, pageNum);
     }
 
