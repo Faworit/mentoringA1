@@ -34,11 +34,7 @@ public class UserAccountServiceImpl implements UserAccountService {
 
     @Override
     public boolean deleteUserAccount(long userAccountId) {
-        boolean isSuccess = false;
-        userAccountDAO.deleteByAccountId(userAccountId);
-        if (userAccountDAO.existsById(userAccountId)) {
-            isSuccess = true;
-        }
-        return isSuccess;
+
+        return userAccountDAO.deleteByAccountId(userAccountId);
     }
 }
