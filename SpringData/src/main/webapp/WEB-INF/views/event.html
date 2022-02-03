@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+<body>
+
+<form th:method="GET" th:action="@{/event/get/{id}(id=${userId})}">
+    <label for="eventId">Enter id: </label>
+    <input type="text" id="eventId"/>
+    <br/>
+    <input type="submit" value="get event"/>
+</form>
+
+<table border="1">
+    <tr>
+        <td>Event</td>
+        <td>Title</td>
+        <td>Date</td>
+    </tr>
+    <tr th:each="event : ${events}">
+        <td th:text="${event.getId()}"></td>
+        <td th:text="${event.getTitle()}"></td>
+        <td th:text="${user.getDate()}"></td>
+    </tr>
+</table>
+
+</body>
+</html>
