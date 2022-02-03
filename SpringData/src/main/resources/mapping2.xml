@@ -1,0 +1,51 @@
+<xs:schema xmlns:xs = "http://www.w3.org/2001/XMLSchema"
+           xmlns:hr = "http://tutorialspoint.com/hr/schemas"
+           elementFormDefault = "qualified"
+           targetNamespace = "http://tutorialspoint.com/hr/schemas" >
+
+    <class name="com.epam.ryabtsev.model.impl.TicketImpl">
+        <map-to xml="ticket" />
+        <field name="id" type="long">
+            <bind-xml name="id" node="attribute"/>
+        </field>
+        <field name="eventId" type="long">
+            <bind-xml name="eventId" node="attribute"/>
+        </field>
+        <field name="userId" type="long">
+            <bind-xml name="userId" node="attribute"/>
+        </field>
+        <field name="place" type="int">
+            <bind-xml name="place" node="attribute"/>
+        </field>
+    </class>
+    <xs:simpleType name="AlphabeticalType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="A"/>
+            <xs:enumeration value="B"/>
+            <xs:enumeration value="C"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name = "LeaveRequest">
+        <xs:complexType>
+            <xs:all>
+                <xs:element name = "Leave" type = "hr:LeaveType"/>
+                <xs:element name = "Employee" type = "hr:EmployeeType"/>
+            </xs:all>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name = "LeaveType">
+        <xs:sequence>
+            <xs:element name = "StartDate" type = "xs:date"/>
+            <xs:element name = "EndDate" type = "xs:date"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name = "EmployeeType">
+        <xs:sequence>
+            <xs:element name = "Number" type = "xs:integer"/>
+            <xs:element name = "FirstName" type = "xs:string"/>
+            <xs:element name = "LastName" type = "xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

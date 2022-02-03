@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>greeting</title>
+</head>
+<body>
+<p><td th:text="${result}"></td></p>
+<!-- user -->
+<p><a href="#" th:href="@{'/action/create'}">Create user</a></p>
+<p><a href="#" th:href="@{'/user/id/1'}">Get action user by Id</a></p>
+
+<!-- event -->
+
+<p><a href="#" th:href="@{'/action/createEvent'}">Create event</a></p>
+<p><a href="#" th:href="@{'/event/id/1'}">Get action user by Id</a></p>
+
+</body>
+</html>
