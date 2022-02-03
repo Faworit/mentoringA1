@@ -10,6 +10,7 @@ public class TicketImpl implements Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
+    @Enumerated(value = EnumType.STRING)
     private Category category;
     private int place;
     @ManyToOne(fetch = FetchType.EAGER)
